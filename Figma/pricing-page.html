@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Common VT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #ffffff;
+            color: #101020;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 2527px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 26px 32px;
+            height: 80px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #101020;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #007bff;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 80px 32px;
+        }
+
+        .pricing-section {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-title {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #101020;
+        }
+
+        .pricing-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Pricing Cards */
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: #007bff;
+        }
+
+        .pricing-card.featured {
+            border-color: #007bff;
+            background: linear-gradient(135deg, #f8f9ff, #ffffff);
+        }
+
+        .plan-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #101020;
+        }
+
+        .plan-price {
+            font-size: 48px;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 8px;
+        }
+
+        .plan-period {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 32px;
+        }
+
+        .plan-description {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+            text-align: left;
+            margin: 32px 0;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 24px;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            background-color: transparent;
+            color: #007bff;
+            border: 2px solid #007bff;
+        }
+
+        .cta-button.secondary:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Badge for featured plan */
+        .featured-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #007bff;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .header {
+                padding: 20px 16px;
+                flex-direction: column;
+                gap: 20px;
+                height: auto;
+            }
+            
+            .nav-menu {
+                gap: 20px;
+            }
+            
+            .pricing-title {
+                font-size: 32px;
+            }
+            
+            .pricing-cards {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .pricing-card {
+                padding: 32px 24px;
+            }
+            
+            .plan-price {
+                font-size: 36px;
+            }
+        }
+
+        /* Additional Features Section */
+        .features-section {
+            margin-top: 80px;
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: #007bff;
+            border-radius: 50%;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #101020;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-mark"></div>
+                <span class="logo-text">YourBrand</span>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="pricing-section">
+                <h1 class="pricing-title">Choose Your Perfect Plan</h1>
+                <p class="pricing-subtitle">Start with our free plan and upgrade as you grow. All plans include our core features with no hidden fees.</p>
+
+                <!-- Pricing Cards -->
+                <div class="pricing-cards">
+                    <!-- Basic Plan -->
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Basic</h3>
+                        <div class="plan-price">$29</div>
+                        <div class="plan-period">per month</div>
+                        <p class="plan-description">Perfect for small teams and startups</p>
+                        
+                        <ul class="feature-list">
+                            <li>Up to 5 team members</li>
+                            <li>10 GB storage</li>
+                            <li>Basic analytics</li>
+                            <li>Email support</li>
+                            <li>Core features</li>
+                        </ul>
+                        
+                        <button class="cta-button secondary">Get Started</button>
+                    </div>
+
+                    <!-- Pro Plan -->
+                    <div class="pricing-card featured">
+                        <div class="featured-badge">Most Popular</div>
+                        <h3 class="plan-name">Pro</h3>
+                        <div class="plan-price">$99</div>
+                        <div class="plan-period">per month</div>
+                        <p class="plan-description">Ideal for growing businesses</p>
+                        
+                        <ul class="feature-list">
+                            <li>Up to 25 team members</li>
+                            <li>100 GB storage</li>
+                            <li>Advanced analytics</li>
+                            <li>Priority support</li>
+                            <li>All Basic features</li>
+                            <li>Custom integrations</li>
+                        </ul>
+                        
+                        <button class="cta-button">Get Started</button>
+                    </div>
+
+                    <!-- Enterprise Plan -->
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Enterprise</h3>
+                        <div class="plan-price">$299</div>
+                        <div class="plan-period">per month</div>
+                        <p class="plan-description">For large organizations</p>
+                        
+                        <ul class="feature-list">
+                            <li>Unlimited team members</li>
+                            <li>1 TB storage</li>
+                            <li>Advanced security</li>
+                            <li>24/7 phone support</li>
+                            <li>All Pro features</li>
+                            <li>Custom solutions</li>
+                            <li>Dedicated account manager</li>
+                        </ul>
+                        
+                        <button class="cta-button secondary">Get Started</button>
+                    </div>
+
+                    <!-- Custom Plan -->
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Custom</h3>
+                        <div class="plan-price">Contact</div>
+                        <div class="plan-period">us for pricing</div>
+                        <p class="plan-description">Tailored solutions for your needs</p>
+                        
+                        <ul class="feature-list">
+                            <li>Custom team size</li>
+                            <li>Unlimited storage</li>
+                            <li>White-label options</li>
+                            <li>Dedicated support</li>
+                            <li>All Enterprise features</li>
+                            <li>Custom development</li>
+                            <li>SLA guarantees</li>
+                        </ul>
+                        
+                        <button class="cta-button secondary">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Features Section -->
+            <section class="features-section">
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🚀</div>
+                        <h3 class="feature-title">Lightning Fast</h3>
+                        <p class="feature-description">Built for speed and performance to handle your growing needs.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <h3 class="feature-title">Enterprise Security</h3>
+                        <p class="feature-description">Bank-level security with encryption and compliance standards.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">Advanced Analytics</h3>
+                        <p class="feature-description">Get insights into your data with powerful analytics tools.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html> 

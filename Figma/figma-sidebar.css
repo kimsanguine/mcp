@@ -1,0 +1,132 @@
+.sidebar {
+  width: 242px;
+  height: 100vh;
+  background: #fff;
+  border-right: 1px solid #ececed;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', Arial, sans-serif;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 32px 12px 0 12px;
+  gap: 8px;
+}
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff;
+  font-size: 18px;
+}
+.logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: #100c20;
+}
+.logo-ai {
+  color: #b423d5;
+  font-weight: 600;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  background: #f3f3f4;
+  border-radius: 8px;
+  margin: 16px 12px 0 12px;
+  padding: 12px;
+  gap: 12px;
+}
+.avatar {
+  width: 32px;
+  height: 32px;
+  background: #e076f5;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+.profile-info .name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #100c20;
+}
+.profile-info .plan {
+  font-size: 12px;
+  font-weight: 600;
+  color: #644aff;
+}
+.unlock-btn {
+  margin: 16px 12px 0 12px;
+  width: calc(100% - 24px);
+  height: 40px;
+  background: #644aff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.nav {
+  flex: 1;
+  margin: 24px 0 0 0;
+  padding: 0 12px;
+}
+.nav-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.nav-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #8c8a94;
+  margin: 8px 0 4px 0;
+  padding-left: 4px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 6px;
+  color: #100c20;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-item.active, .nav-item:hover {
+  background: #f3f3f4;
+  color: #644aff;
+}
+.bottom-nav {
+  margin: 16px 0 0 0;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.footer {
+  margin: 24px 0 0 0;
+  padding: 0 12px 16px 12px;
+  font-size: 10px;
+  color: #8c8a94;
+  text-align: left;
+  line-height: 1.5;
+} 

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - LoanSearch</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="ri-bank-line"></i>
+                <span>LoanSearch</span>
+            </div>
+            <span class="badge-admin">Admin</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="sidebar-link active">
+                <i class="ri-dashboard-line"></i>
+                Dashboard
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="ri-bar-chart-box-line"></i>
+                Analytics
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="ri-flask-line"></i>
+                Experiments
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="ri-settings-3-line"></i>
+                Settings
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="ri-database-2-line"></i>
+                Products
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="index.html" class="sidebar-link">
+                <i class="ri-arrow-left-line"></i>
+                Back to Search
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1>Search Performance Dashboard</h1>
+            <div class="header-actions">
+                <span class="last-updated">Last updated: 2 minutes ago</span>
+                <button class="btn-refresh">
+                    <i class="ri-refresh-line"></i> Refresh
+                </button>
+            </div>
+        </header>
+
+        <!-- Metrics Cards -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-icon blue">
+                    <i class="ri-search-line"></i>
+                </div>
+                <div class="metric-content">
+                    <span class="metric-label">Total Searches</span>
+                    <span class="metric-value">12,340</span>
+                    <span class="metric-change positive">
+                        <i class="ri-arrow-up-line"></i> 15% from last week
+                    </span>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon green">
+                    <i class="ri-cursor-line"></i>
+                </div>
+                <div class="metric-content">
+                    <span class="metric-label">Avg CTR</span>
+                    <span class="metric-value">68.2%</span>
+                    <span class="metric-change positive">
+                        <i class="ri-arrow-up-line"></i> 3.2% from last week
+                    </span>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon orange">
+                    <i class="ri-error-warning-line"></i>
+                </div>
+                <div class="metric-content">
+                    <span class="metric-label">Zero-Result Rate</span>
+                    <span class="metric-value">2.3%</span>
+                    <span class="metric-change positive">
+                        <i class="ri-arrow-down-line"></i> 0.5% from last week
+                    </span>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon purple">
+                    <i class="ri-time-line"></i>
+                </div>
+                <div class="metric-content">
+                    <span class="metric-label">Avg Response Time</span>
+                    <span class="metric-value">124ms</span>
+                    <span class="metric-change positive">
+                        <i class="ri-arrow-down-line"></i> 18ms faster
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Search Weight Configuration -->
+            <section class="dashboard-card config-card">
+                <div class="card-header">
+                    <h2><i class="ri-equalizer-line"></i> Search Weight Configuration</h2>
+                    <div class="card-actions">
+                        <button class="btn-text" onclick="testConfiguration()">
+                            <i class="ri-play-line"></i> Test
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="weight-slider">
+                        <div class="weight-header">
+                            <span class="weight-label">
+                                <i class="ri-brain-line" style="color: var(--vector-color)"></i>
+                                Vector Weight
+                            </span>
+                            <span class="weight-value" id="vectorValueDisplay">1.2</span>
+                        </div>
+                        <input type="range" id="vectorWeight" min="0" max="2" step="0.1" value="1.2"
+                               oninput="document.getElementById('vectorValueDisplay').textContent = this.value">
+                        <div class="weight-scale">
+                            <span>0</span>
+                            <span>1.0</span>
+                            <span>2.0</span>
+                        </div>
+                    </div>
+
+                    <div class="weight-slider">
+                        <div class="weight-header">
+                            <span class="weight-label">
+                                <i class="ri-text" style="color: var(--bm25-color)"></i>
+                                BM25 Weight
+                            </span>
+                            <span class="weight-value" id="bm25ValueDisplay">0.8</span>
+                        </div>
+                        <input type="range" id="bm25Weight" min="0" max="2" step="0.1" value="0.8"
+                               oninput="document.getElementById('bm25ValueDisplay').textContent = this.value">
+                        <div class="weight-scale">
+                            <span>0</span>
+                            <span>1.0</span>
+                            <span>2.0</span>
+                        </div>
+                    </div>
+
+                    <div class="weight-slider">
+                        <div class="weight-header">
+                            <span class="weight-label">
+                                <i class="ri-sort-asc" style="color: var(--rrf-color)"></i>
+                                RRF K Value
+                            </span>
+                            <span class="weight-value" id="rrfKDisplay">60</span>
+                        </div>
+                        <input type="range" id="rrfK" min="1" max="100" step="1" value="60"
+                               oninput="document.getElementById('rrfKDisplay').textContent = this.value">
+                        <div class="weight-scale">
+                            <span>1</span>
+                            <span>50</span>
+                            <span>100</span>
+                        </div>
+                    </div>
+
+                    <div class="config-actions">
+                        <button class="btn-secondary">
+                            <i class="ri-refresh-line"></i> Reset to Default
+                        </button>
+                        <button class="btn-primary" onclick="applyWeights()">
+                            <i class="ri-check-line"></i> Apply to Production
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- A/B Test Panel -->
+            <section class="dashboard-card">
+                <div class="card-header">
+                    <h2><i class="ri-flask-line"></i> A/B Tests</h2>
+                    <button class="btn-text">
+                        <i class="ri-add-line"></i> New Test
+                    </button>
+                </div>
+                <div class="card-body">
+                    <!-- Active Test -->
+                    <div class="ab-test active">
+                        <div class="test-header">
+                            <div class="test-status running">
+                                <i class="ri-loader-4-line"></i> Running
+                            </div>
+                            <span class="test-duration">Day 7/14</span>
+                        </div>
+                        <h3 class="test-name">Re-ranking Enabled vs Disabled</h3>
+                        <div class="test-variants">
+                            <div class="variant">
+                                <div class="variant-header">
+                                    <span class="variant-name">A (Control)</span>
+                                    <span class="variant-metric">CTR: 65.2%</span>
+                                </div>
+                                <div class="variant-bar">
+                                    <div class="variant-fill control" style="width: 65.2%"></div>
+                                </div>
+                            </div>
+                            <div class="variant winner">
+                                <div class="variant-header">
+                                    <span class="variant-name">B (Re-rank) <i class="ri-star-fill"></i></span>
+                                    <span class="variant-metric highlight">CTR: 71.8%</span>
+                                </div>
+                                <div class="variant-bar">
+                                    <div class="variant-fill treatment" style="width: 71.8%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="test-footer">
+                            <div class="test-stats">
+                                <span class="stat-item">
+                                    <strong>+6.6%</strong> improvement
+                                </span>
+                                <span class="stat-item">
+                                    <strong>94%</strong> confidence
+                                </span>
+                                <span class="stat-item">
+                                    <strong>12,340</strong> samples
+                                </span>
+                            </div>
+                            <div class="test-actions">
+                                <button class="btn-text-small">Stop</button>
+                                <button class="btn-text-small">Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Completed Test -->
+                    <div class="ab-test completed">
+                        <div class="test-header">
+                            <div class="test-status completed">
+                                <i class="ri-checkbox-circle-line"></i> Completed
+                            </div>
+                            <span class="test-duration">2 days ago</span>
+                        </div>
+                        <h3 class="test-name">RRF K=60 vs K=30</h3>
+                        <div class="test-result">
+                            <span class="winner-badge">
+                                <i class="ri-trophy-line"></i> Winner: K=60 (+8.2% CTR)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Top Queries -->
+            <section class="dashboard-card">
+                <div class="card-header">
+                    <h2><i class="ri-search-eye-line"></i> Top Queries (Last 7 days)</h2>
+                    <button class="btn-text">View All</button>
+                </div>
+                <div class="card-body">
+                    <div class="query-list">
+                        <div class="query-item">
+                            <span class="query-rank">1</span>
+                            <span class="query-text">청년 전세 대출</span>
+                            <div class="query-stats">
+                                <span class="query-count">2,340</span>
+                                <span class="query-ctr good">CTR: 72%</span>
+                            </div>
+                        </div>
+                        <div class="query-item">
+                            <span class="query-rank">2</span>
+                            <span class="query-text">신용대출 저금리</span>
+                            <div class="query-stats">
+                                <span class="query-count">1,890</span>
+                                <span class="query-ctr good">CTR: 68%</span>
+                            </div>
+                        </div>
+                        <div class="query-item">
+                            <span class="query-rank">3</span>
+                            <span class="query-text">주택담보대출 금리비교</span>
+                            <div class="query-stats">
+                                <span class="query-count">1,456</span>
+                                <span class="query-ctr">CTR: 61%</span>
+                            </div>
+                        </div>
+                        <div class="query-item">
+                            <span class="query-rank">4</span>
+                            <span class="query-text">신혼부부 전세</span>
+                            <div class="query-stats">
+                                <span class="query-count">1,234</span>
+                                <span class="query-ctr good">CTR: 75%</span>
+                            </div>
+                        </div>
+                        <div class="query-item">
+                            <span class="query-rank">5</span>
+                            <span class="query-text">정책금융 대출</span>
+                            <div class="query-stats">
+                                <span class="query-count">987</span>
+                                <span class="query-ctr">CTR: 58%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Zero-Result Queries -->
+            <section class="dashboard-card">
+                <div class="card-header">
+                    <h2><i class="ri-error-warning-line"></i> Zero-Result Queries</h2>
+                    <span class="badge-warning">Action Required</span>
+                </div>
+                <div class="card-body">
+                    <div class="zero-result-list">
+                        <div class="zero-result-item">
+                            <div class="zero-result-info">
+                                <span class="zero-result-query">"대환대출"</span>
+                                <span class="zero-result-count">234 searches</span>
+                            </div>
+                            <span class="zero-result-action">상품 데이터 추가 필요</span>
+                        </div>
+                        <div class="zero-result-item">
+                            <div class="zero-result-info">
+                                <span class="zero-result-query">"무직자 대출"</span>
+                                <span class="zero-result-count">189 searches</span>
+                            </div>
+                            <span class="zero-result-action">정책 검토 필요</span>
+                        </div>
+                        <div class="zero-result-item">
+                            <div class="zero-result-info">
+                                <span class="zero-result-query">"급전 대출"</span>
+                                <span class="zero-result-count">145 searches</span>
+                            </div>
+                            <span class="zero-result-action">동의어 추가 검토</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Method Comparison -->
+            <section class="dashboard-card wide">
+                <div class="card-header">
+                    <h2><i class="ri-bar-chart-grouped-line"></i> Vector vs BM25 Contribution</h2>
+                </div>
+                <div class="card-body">
+                    <div class="contribution-chart">
+                        <div class="contribution-bar">
+                            <div class="contribution-segment vector" style="width: 62%">
+                                <span>Vector 62%</span>
+                            </div>
+                            <div class="contribution-segment bm25" style="width: 38%">
+                                <span>BM25 38%</span>
+                            </div>
+                        </div>
+                        <div class="contribution-legend">
+                            <div class="legend-item">
+                                <span class="legend-dot vector"></span>
+                                <span>Vector dominates (의미 검색 우세)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot bm25"></span>
+                                <span>BM25 dominates (키워드 검색 우세)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contribution-insights">
+                        <div class="insight-item">
+                            <i class="ri-lightbulb-line"></i>
+                            <span>자연어 쿼리 ("저금리 주택 대출")에서 Vector가 더 효과적</span>
+                        </div>
+                        <div class="insight-item">
+                            <i class="ri-lightbulb-line"></i>
+                            <span>정확한 상품명 검색 ("디딤돌 대출")에서 BM25가 더 효과적</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
